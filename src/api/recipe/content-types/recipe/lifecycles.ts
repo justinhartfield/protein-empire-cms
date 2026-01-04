@@ -7,7 +7,7 @@
 const GITHUB_WEBHOOK_URL = process.env.GITHUB_WEBHOOK_URL;
 const GITHUB_WEBHOOK_TOKEN = process.env.GITHUB_WEBHOOK_TOKEN;
 
-async function triggerGitHubWorkflow(site?: string) {
+async function triggerGitHubWorkflow() {
   if (!GITHUB_WEBHOOK_URL || !GITHUB_WEBHOOK_TOKEN) {
     console.log('GitHub webhook not configured, skipping...');
     return;
@@ -24,7 +24,6 @@ async function triggerGitHubWorkflow(site?: string) {
       body: JSON.stringify({
         event_type: 'strapi-content-update',
         client_payload: {
-          site: site || '',
           timestamp: new Date().toISOString(),
         },
       }),
@@ -40,39 +39,17 @@ async function triggerGitHubWorkflow(site?: string) {
   }
 }
 
-interface RecipeWithSite {
-  site?: {
-    domain?: string;
-  };
-}
-
-async function getSiteDomain(recipeId: number): Promise<string | null> {
-  try {
-    const recipe = await strapi.entityService.findOne('api::recipe.recipe', recipeId, {
-      populate: ['site'],
-    }) as RecipeWithSite | null;
-    return recipe?.site?.domain || null;
-  } catch {
-    return null;
-  }
-}
-
 export default {
-  async afterCreate(event: { result: { id: number } }) {
-    const { result } = event;
-    const site = await getSiteDomain(result.id);
+  afterCreate() {
     // Debounce: wait 5 seconds before triggering to batch multiple changes
-    setTimeout(() => triggerGitHubWorkflow(site || undefined), 5000);
+    setTimeout(() => triggerGitHubWorkflow(), 5000);
   },
 
-  async afterUpdate(event: { result: { id: number } }) {
-    const { result } = event;
-    const site = await getSiteDomain(result.id);
-    setTimeout(() => triggerGitHubWorkflow(site || undefined), 5000);
+  afterUpdate() {
+    setTimeout(() => triggerGitHubWorkflow(), 5000);
   },
 
-  async afterDelete() {
-    // Can't get site from deleted recipe, trigger full rebuild
+  afterDelete() {
     setTimeout(() => triggerGitHubWorkflow(), 5000);
   },
 };
