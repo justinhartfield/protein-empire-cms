@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "recipe_packs",
+  "info": {
+    "singularName": "recipe-pack",
+    "pluralName": "recipe-packs",
+    "displayName": "Recipe Pack",
+    "description": "A curated collection of recipes for lead generation"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "icon": {
+      "type": "string"
+    },
+    "isFree": {
+      "type": "boolean",
+      "default": true
+    },
+    "pdfFile": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["files"]
+    },
+    "site": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::site.site",
+      "inversedBy": "recipePacks"
+    },
+    "recipes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::recipe.recipe",
+      "mappedBy": "recipePacks"
+    }
+  }
+}

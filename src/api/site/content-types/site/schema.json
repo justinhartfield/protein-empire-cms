@@ -1,0 +1,74 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sites",
+  "info": {
+    "singularName": "site",
+    "pluralName": "sites",
+    "displayName": "Site",
+    "description": "A protein recipe website in the empire"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "domain": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "foodType": {
+      "type": "string",
+      "required": true
+    },
+    "foodTypePlural": {
+      "type": "string",
+      "required": true
+    },
+    "tagline": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "brandColor": {
+      "type": "string",
+      "default": "#f59e0b"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "favicon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "recipes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::recipe.recipe",
+      "mappedBy": "site"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category",
+      "mappedBy": "site"
+    },
+    "recipePacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::recipe-pack.recipe-pack",
+      "mappedBy": "site"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_recipe_ingredients",
+  "info": {
+    "displayName": "Ingredient",
+    "icon": "shopping-cart",
+    "description": "A recipe ingredient with amount in grams"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "amount": {
+      "type": "integer",
+      "required": true
+    },
+    "unit": {
+      "type": "string",
+      "default": "g"
+    },
+    "usUnit": {
+      "type": "string"
+    },
+    "ingredientId": {
+      "type": "string"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": ["dry", "wet", "topping", "other"],
+      "default": "dry"
+    }
+  }
+}

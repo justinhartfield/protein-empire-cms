@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_recipe_instructions",
+  "info": {
+    "displayName": "Instruction",
+    "icon": "list-ol",
+    "description": "A recipe instruction step"
+  },
+  "options": {},
+  "attributes": {
+    "step": {
+      "type": "integer",
+      "required": true
+    },
+    "text": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

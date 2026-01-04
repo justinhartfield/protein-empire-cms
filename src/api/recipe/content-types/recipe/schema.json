@@ -1,0 +1,118 @@
+{
+  "kind": "collectionType",
+  "collectionName": "recipes",
+  "info": {
+    "singularName": "recipe",
+    "pluralName": "recipes",
+    "displayName": "Recipe",
+    "description": "A macro-verified protein recipe"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "prepTime": {
+      "type": "integer",
+      "required": true,
+      "default": 10
+    },
+    "cookTime": {
+      "type": "integer",
+      "required": true,
+      "default": 15
+    },
+    "totalTime": {
+      "type": "integer",
+      "required": true,
+      "default": 25
+    },
+    "yield": {
+      "type": "integer",
+      "required": true,
+      "default": 12
+    },
+    "difficulty": {
+      "type": "enumeration",
+      "enum": ["Beginner", "Easy", "Medium", "Advanced"],
+      "default": "Easy"
+    },
+    "ingredients": {
+      "type": "component",
+      "repeatable": true,
+      "component": "recipe.ingredient"
+    },
+    "instructions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "recipe.instruction"
+    },
+    "protein": {
+      "type": "integer",
+      "required": true
+    },
+    "calories": {
+      "type": "integer",
+      "required": true
+    },
+    "carbs": {
+      "type": "integer",
+      "required": true
+    },
+    "fat": {
+      "type": "integer",
+      "required": true
+    },
+    "fiber": {
+      "type": "integer",
+      "default": 0
+    },
+    "sugar": {
+      "type": "integer",
+      "default": 0
+    },
+    "tags": {
+      "type": "json"
+    },
+    "keywords": {
+      "type": "json"
+    },
+    "site": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::site.site",
+      "inversedBy": "recipes"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "recipes"
+    },
+    "recipePacks": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::recipe-pack.recipe-pack",
+      "inversedBy": "recipes"
+    }
+  }
+}
