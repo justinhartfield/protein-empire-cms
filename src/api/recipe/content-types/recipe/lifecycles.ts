@@ -40,11 +40,17 @@ async function triggerGitHubWorkflow(site?: string) {
   }
 }
 
-async function getSiteDomain(recipeId: number) {
+interface RecipeWithSite {
+  site?: {
+    domain?: string;
+  };
+}
+
+async function getSiteDomain(recipeId: number): Promise<string | null> {
   try {
     const recipe = await strapi.entityService.findOne('api::recipe.recipe', recipeId, {
       populate: ['site'],
-    });
+    }) as RecipeWithSite | null;
     return recipe?.site?.domain || null;
   } catch {
     return null;
@@ -52,20 +58,20 @@ async function getSiteDomain(recipeId: number) {
 }
 
 export default {
-  async afterCreate(event) {
+  async afterCreate(event: { result: { id: number } }) {
     const { result } = event;
     const site = await getSiteDomain(result.id);
     // Debounce: wait 5 seconds before triggering to batch multiple changes
-    setTimeout(() => triggerGitHubWorkflow(site), 5000);
+    setTimeout(() => triggerGitHubWorkflow(site || undefined), 5000);
   },
 
-  async afterUpdate(event) {
+  async afterUpdate(event: { result: { id: number } }) {
     const { result } = event;
     const site = await getSiteDomain(result.id);
-    setTimeout(() => triggerGitHubWorkflow(site), 5000);
+    setTimeout(() => triggerGitHubWorkflow(site || undefined), 5000);
   },
 
-  async afterDelete(event) {
+  async afterDelete() {
     // Can't get site from deleted recipe, trigger full rebuild
     setTimeout(() => triggerGitHubWorkflow(), 5000);
   },
