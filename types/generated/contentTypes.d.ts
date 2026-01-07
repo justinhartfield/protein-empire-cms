@@ -430,6 +430,158 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiConstraintConstraint extends Struct.CollectionTypeSchema {
+  collectionName: 'constraints';
+  info: {
+    description: 'Dietary and lifestyle constraints for recipe filtering';
+    displayName: 'Constraint';
+    pluralName: 'constraints';
+    singularName: 'constraint';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::constraint.constraint'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<['dietary', 'time', 'budget', 'skill', 'equipment']> &
+      Schema.Attribute.DefaultTo<'dietary'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiGoalGoal extends Struct.CollectionTypeSchema {
+  collectionName: 'goals';
+  info: {
+    description: 'User goals for recipe filtering (e.g., muscle gain, weight loss)';
+    displayName: 'Goal';
+    pluralName: 'goals';
+    singularName: 'goal';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::goal.goal'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiHubPageHubPage extends Struct.CollectionTypeSchema {
+  collectionName: 'hub_pages';
+  info: {
+    description: 'Dynamic landing pages for Dotoro integration with filtering capabilities';
+    displayName: 'Hub Page';
+    pluralName: 'hub-pages';
+    singularName: 'hub-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    calorieBandMax: Schema.Attribute.Integer;
+    calorieBandMin: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    ctaButtonLink: Schema.Attribute.String;
+    ctaButtonText: Schema.Attribute.String;
+    ctaHeadline: Schema.Attribute.String;
+    defaultFilters: Schema.Attribute.JSON;
+    faqContent: Schema.Attribute.RichText;
+    filterRules: Schema.Attribute.JSON;
+    heroHeadline: Schema.Attribute.String;
+    heroImage: Schema.Attribute.Media<'images'>;
+    heroSubheadline: Schema.Attribute.Text;
+    introContent: Schema.Attribute.RichText;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::hub-page.hub-page'
+    > &
+      Schema.Attribute.Private;
+    metaDescription: Schema.Attribute.Text;
+    metaTitle: Schema.Attribute.String;
+    order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    proteinBandMax: Schema.Attribute.Integer;
+    proteinBandMin: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    siteId: Schema.Attribute.Integer;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    timeBandMax: Schema.Attribute.Integer;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    bottomContent: Schema.Attribute.RichText;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiOutcomeOutcome extends Struct.CollectionTypeSchema {
+  collectionName: 'outcomes';
+  info: {
+    description: 'Desired outcomes for recipe filtering (e.g., high protein, low calorie)';
+    displayName: 'Outcome';
+    pluralName: 'outcomes';
+    singularName: 'outcome';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::outcome.outcome'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -1126,6 +1278,10 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::category.category': ApiCategoryCategory;
+      'api::constraint.constraint': ApiConstraintConstraint;
+      'api::goal.goal': ApiGoalGoal;
+      'api::hub-page.hub-page': ApiHubPageHubPage;
+      'api::outcome.outcome': ApiOutcomeOutcome;
       'api::recipe-pack.recipe-pack': ApiRecipePackRecipePack;
       'api::recipe.recipe': ApiRecipeRecipe;
       'api::site.site': ApiSiteSite;
