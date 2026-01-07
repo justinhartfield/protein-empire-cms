@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "outcomes",
+  "info": {
+    "singularName": "outcome",
+    "pluralName": "outcomes",
+    "displayName": "Outcome",
+    "description": "Desired outcomes for recipe filtering (e.g., high protein, low calorie)"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "recipes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::recipe.recipe",
+      "inversedBy": "outcomes"
+    }
+  }
+}

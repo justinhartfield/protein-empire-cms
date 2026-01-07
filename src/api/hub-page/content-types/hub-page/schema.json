@@ -1,0 +1,115 @@
+{
+  "kind": "collectionType",
+  "collectionName": "hub_pages",
+  "info": {
+    "singularName": "hub-page",
+    "pluralName": "hub-pages",
+    "displayName": "Hub Page",
+    "description": "Dynamic landing pages for Dotoro integration with filtering capabilities"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "metaTitle": {
+      "type": "string"
+    },
+    "metaDescription": {
+      "type": "text"
+    },
+    "heroHeadline": {
+      "type": "string"
+    },
+    "heroSubheadline": {
+      "type": "text"
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "introContent": {
+      "type": "richtext"
+    },
+    "filterRules": {
+      "type": "json"
+    },
+    "defaultFilters": {
+      "type": "json"
+    },
+    "ctaHeadline": {
+      "type": "string"
+    },
+    "ctaButtonText": {
+      "type": "string"
+    },
+    "ctaButtonLink": {
+      "type": "string"
+    },
+    "faqContent": {
+      "type": "richtext"
+    },
+    "bottomContent": {
+      "type": "richtext"
+    },
+    "site": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::site.site",
+      "inversedBy": "hubPages"
+    },
+    "relatedHubPages": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::hub-page.hub-page"
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "proteinBandMin": {
+      "type": "integer"
+    },
+    "proteinBandMax": {
+      "type": "integer"
+    },
+    "calorieBandMin": {
+      "type": "integer"
+    },
+    "calorieBandMax": {
+      "type": "integer"
+    },
+    "timeBandMax": {
+      "type": "integer"
+    },
+    "goals": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::goal.goal"
+    },
+    "constraints": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::constraint.constraint"
+    },
+    "outcomes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::outcome.outcome"
+    }
+  }
+}
