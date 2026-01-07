@@ -1,7 +1,2 @@
-/**
- * hub-page service
- */
-
 import { factories } from '@strapi/strapi';
-
 export default factories.createCoreService('api::hub-page.hub-page');
