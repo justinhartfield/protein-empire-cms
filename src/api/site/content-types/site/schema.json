@@ -69,12 +69,6 @@
       "relation": "oneToMany",
       "target": "api::recipe-pack.recipe-pack",
       "mappedBy": "site"
-    },
-    "hubPages": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::hub-page.hub-page",
-      "mappedBy": "site"
     }
   }
 }

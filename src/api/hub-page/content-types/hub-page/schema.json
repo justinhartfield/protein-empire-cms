@@ -62,17 +62,6 @@
     "bottomContent": {
       "type": "richtext"
     },
-    "site": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::site.site",
-      "inversedBy": "hubPages"
-    },
-    "relatedHubPages": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::hub-page.hub-page"
-    },
     "order": {
       "type": "integer",
       "default": 0
@@ -96,20 +85,8 @@
     "timeBandMax": {
       "type": "integer"
     },
-    "goals": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::goal.goal"
-    },
-    "constraints": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::constraint.constraint"
-    },
-    "outcomes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::outcome.outcome"
+    "siteId": {
+      "type": "integer"
     }
   }
 }

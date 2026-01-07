@@ -113,24 +113,6 @@
       "relation": "manyToMany",
       "target": "api::recipe-pack.recipe-pack",
       "inversedBy": "recipes"
-    },
-    "goals": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::goal.goal",
-      "inversedBy": "recipes"
-    },
-    "constraints": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::constraint.constraint",
-      "inversedBy": "recipes"
-    },
-    "outcomes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::outcome.outcome",
-      "inversedBy": "recipes"
     }
   }
 }

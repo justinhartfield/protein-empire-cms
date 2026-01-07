@@ -35,12 +35,6 @@
     "order": {
       "type": "integer",
       "default": 0
-    },
-    "recipes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::recipe.recipe",
-      "inversedBy": "constraints"
     }
   }
 }
